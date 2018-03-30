@@ -1,6 +1,6 @@
  function unifiCallback (session,args) {
 	var builder = require('botbuilder');
-    session.send('Inside unifi');
+    //session.send('Inside unifi');
 	var unifi = builder.EntityRecognizer.findEntity(args.intent.entities, 'unifi');
 	var open2 = builder.EntityRecognizer.findEntity(args.intent.entities, 'open');
 	var access = builder.EntityRecognizer.findEntity(args.intent.entities, 'access');
