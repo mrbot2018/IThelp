@@ -12,7 +12,7 @@ var dor = require('./doorfunc');
 //import revitCallback from "./revitfunc";
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 81 || 80, function () {
+server.listen(process.env.port || process.env.PORT || 8000, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
@@ -36,7 +36,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
 //bot.dialog('login', require('./login'));
 //bot.dialog('getMachineId', require('./getMachineId'));
 //Create LUIS recognizer that points at our model and add it as the root '/' dialog.
-var recognizer = new builder.LuisRecognizer('https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/0cade46e-3882-499e-93f6-dd63554e8184?subscription-key=638ee9aeb729407aa09215840a0cae05&verbose=true&timezoneOffset=0&q=');/*here we use the URL that we copied earlier*/
+var recognizer = new builder.LuisRecognizer('https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/7c756f9f-9109-457c-9c37-3e86f6f7dfc1?subscription-key=c9a5b3c15e5a46cfaaea7fbaf90a4cf3&spellCheck=true&bing-spell-check-subscription-key={YOUR_BING_KEY_HERE}&verbose=true&timezoneOffset=0&q=');/*here we use the URL that we copied earlier*/
 bot.recognizer(recognizer);
 
 
@@ -68,7 +68,28 @@ bot.dialog('model', function (session,args) {
     }).triggerAction({
     matches: 'model'
 });
+////////////////////////////////
+bot.dialog('Hello', [
+    function (session) {
+        session.send('hello, how can I help?')
+        session.endDialog();
+    }
+   
+]).triggerAction({
+    matches: 'Hello'
+});
+///////////////////////////////
+bot.dialog('Capital France', [
+    function (session) {
+        session.send('The Capital of France is Paris')
+        session.endDialog();
+    }
+   
+]).triggerAction({
+    matches: 'Capital France'
+});
 //////////////////////////////////////
+
 bot.dialog('revit', function (session,args) {
 	rev.revitCallback(session,args);
 }).triggerAction({
