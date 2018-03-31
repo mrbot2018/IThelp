@@ -12,7 +12,7 @@ var dor = require('./doorfunc');
 //import revitCallback from "./revitfunc";
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 8000, function () {
+server.listen(process.env.port || process.env.PORT || 81 || 80, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
